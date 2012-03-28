@@ -15,7 +15,7 @@ make lint
 #
 # Report
 #
-python client.py
+make report
 
 growlnotify -m "end CI"
 rm -f build.lock

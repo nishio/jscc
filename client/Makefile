@@ -40,3 +40,8 @@ compile: deps.js
 	    > /dev/null 2> new_compile.log
 	mv new_compile.log compile.log
 	cat compile.log
+
+report:
+	@cat lint.log
+	@cat compile.log
+	python client.py

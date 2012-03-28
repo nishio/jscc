@@ -44,3 +44,4 @@ compile: deps.js
 report:
 	@cat lint.log
 	@cat compile.log
+	python client.py
