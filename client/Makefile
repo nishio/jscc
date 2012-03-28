@@ -3,7 +3,7 @@ CLOSURE_LIB = ../client/thirdparty/closure-library
 CALCDEPS = $(CLOSURE_LIB)/closure/bin/calcdeps.py
 CLOSURE_BUILDER = $(CLOSURE_LIB)/closure/bin/build/closurebuilder.py
 CLOSURE_COMPILER = ../client/thirdparty/compiler.jar
-LIBPATH = .
+LIBPATH = js $(CLOSURE_LIB)
 ENTRYPOINT = static/main.js
 
 # automatic settings
