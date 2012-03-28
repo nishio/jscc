@@ -1,0 +1,5 @@
+.DS_Store
+server/deps.js
+server/deps.txt
+tool/errors.pickle
+client/thirdparty
