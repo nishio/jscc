@@ -28,16 +28,24 @@ For client
 ----------
 
 - Closure Linter
-  How to Use Closure Linter - Closure Tools — Google Developers
+
   https://developers.google.com/closure/utilities/docs/linter_howto
 
-- Watchdog
-  http://packages.python.org/watchdog/
 
 - growlnotify
+
   http://growl.info/extras.php#growlnotify
 
+
+- Watchdog
+
+  http://packages.python.org/watchdog/
+
+  $ pip install watchdog
+
+
 - Closure Library (*)
+
 - Closure Compiler (*)
 
 
@@ -46,9 +54,12 @@ For server
 ----------
 
 - Flask
+
   http://flask.pocoo.org/
 
+
 - Highcharts (*)
+
   http://www.highcharts.com/
 
 
