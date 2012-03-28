@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 import urllib2
 import urllib
+import argparse
 
 data = {"error": None, "warning": None}
 messages = []
@@ -29,5 +30,12 @@ for line in open("compile.log"):
 
 data["when"] = datetime.now().isoformat()
 data["success"] = success
-urllib2.urlopen("http://localhost:8104/api/put?" + urllib.urlencode({"json": json.dumps(data)}))
 
+
+parser = argparse.ArgumentParser(description='send info to visualizing server')
+parser.add_argument('--port', default=8104, type=int)
+parser.add_argument('--server', default="localhost", type=str)
+
+args = parser.parse_args()
+URL = "http://%s:%s/api/put?" % (args.server, args.port)
+urllib2.urlopen(URL + urllib.urlencode({"json": json.dumps(data)}))

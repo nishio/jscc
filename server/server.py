@@ -1,3 +1,4 @@
+import argparse
 import hashlib
 import json
 import cPickle
@@ -6,6 +7,7 @@ from flask import Flask
 from flask import request
 from flask import render_template
 from flask import redirect, url_for
+
 data = {
     "when": datetime.now().isoformat(),
     "error": 0,
@@ -13,6 +15,7 @@ data = {
     "lint": 0,
     "success": True,
 }
+
 cPickle.dump(data, file("database", "wb"))
 
 app = Flask(__name__)
@@ -36,4 +39,8 @@ def get_data():
 
 
 if __name__ == "__main__":
-    app.run('0.0.0.0', 8104)
+    parser = argparse.ArgumentParser(description='Visualizing server')
+    parser.add_argument('--port', default=8104, type=int)
+
+    args = parser.parse_args()
+    app.run('0.0.0.0', args.port)
