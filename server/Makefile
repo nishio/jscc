@@ -25,8 +25,8 @@ watch: deps.txt
 
 lint: deps.txt
 	-cat deps.txt | xargs gjslint > new_lint.log 2> /dev/null
-	mv new_lint.log lint.log
-	cat lint.log
+	@mv new_lint.log lint.log
+	@cat lint.log
 
 compile: deps.js
 	-$(CLOSURE_BUILDER) \
@@ -38,5 +38,9 @@ compile: deps.js
 	    -f --jscomp_warning=visibility \
 	    --compiler_flags="--js=deps.js" \
 	    > /dev/null 2> new_compile.log
-	mv new_compile.log compile.log
-	cat compile.log
+	@mv new_compile.log compile.log
+	@cat compile.log
+
+report:
+	@cat lint.log
+	@cat compile.log
