@@ -106,7 +106,7 @@ main.main = function($, Highcharts) {
                 DateUTC: false
             }
         });
-        var error_graph = add_graph('error', 'Compile errors');
+        add_graph('error', 'Compile errors');
         add_graph('warning', 'Compile warning');
         add_graph('lint', 'Lint warning');
         $('svg > rect').attr('fill', 'none');
