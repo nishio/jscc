@@ -5,10 +5,12 @@ CLOSURE_BUILDER = $(CLOSURE_LIB)/closure/bin/build/closurebuilder.py
 CLOSURE_COMPILER = ../client/thirdparty/compiler.jar
 LIBPATH = js $(CLOSURE_LIB)
 ENTRYPOINT = static/main.js
+EXTERNS = ../common/externs/nhiro.js
 
 # automatic settings
 LIBPATH_FOR_CALCDEPS = $(patsubst %,-p %, $(LIBPATH))
 LIBPATH_FOR_BUILDER = $(patsubst %,--root="%", $(LIBPATH))
+EXTERNS_FOR_BUILDER = $(patsubst %,--compiler_flags="--externs=%", $(EXTERNS))
 
 # targets
 deps: deps.js deps.txt
@@ -32,6 +34,7 @@ compile: deps.js
 	-$(CLOSURE_BUILDER) \
 	    --namespace="main.main" \
 	    $(LIBPATH_FOR_BUILDER) \
+	    $(EXTERNS_FOR_BUILDER) \
 	    --output_mode=compiled --compiler_jar="$(CLOSURE_COMPILER)" \
 	    -f --compilation_level=ADVANCED_OPTIMIZATIONS \
 	    -f --warning_level=VERBOSE \
