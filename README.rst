@@ -30,7 +30,12 @@ For client
 - Closure Linter
   How to Use Closure Linter - Closure Tools — Google Developers
   https://developers.google.com/closure/utilities/docs/linter_howto
+
 - Watchdog
+  http://packages.python.org/watchdog/
+
+- growlnotify
+  http://growl.info/extras.php#growlnotify
 
 - Closure Library (*)
 - Closure Compiler (*)
@@ -41,8 +46,16 @@ For server
 ----------
 
 - Flask
+  http://flask.pocoo.org/
 
 - Highcharts (*)
   http://www.highcharts.com/
 
 
+ISSUES
+======
+
+- we need nice way to kill watching process
+- enbug.py will crash if empty file is passed
+- enbug.py will hung up if a whitespace-only file is passed
+- enbug.py should output bugs as line diff.
