@@ -1,0 +1,15 @@
+#error, #warning, #lint {
+    height: 30%;
+    width: 100%;
+}
+
+#container {
+    width: 320px;
+    height: 480px;
+}
+
+#border {
+    border: solid 10px;
+    border-color: white;
+    height: 100%;
+}
