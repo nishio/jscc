@@ -5,7 +5,7 @@ CLOSURE_BUILDER = $(CLOSURE_LIB)/closure/bin/build/closurebuilder.py
 CLOSURE_COMPILER = ../client/thirdparty/compiler.jar
 LIBPATH = js $(CLOSURE_LIB)
 ENTRYPOINT = static/main.js
-EXTERNS = ../common/externs/nhiro.js
+EXTERNS = 
 
 # automatic settings
 LIBPATH_FOR_CALCDEPS = $(patsubst %,-p %, $(LIBPATH))
