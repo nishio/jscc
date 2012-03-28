@@ -47,7 +47,7 @@ def enbug(filename, num):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Put bugs in your code!')
-    parser.add_argument('-n', default=100,
+    parser.add_argument('-n', default=1,
                         help="number of bugs per file")
     parser.add_argument('targets', metavar='F', type=str, nargs='+',
                         help='target files to enbug')
