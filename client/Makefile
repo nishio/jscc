@@ -48,3 +48,11 @@ report:
 	@cat lint.log
 	@cat compile.log
 	python client.py
+
+# test welknown problems
+conftest:
+	-ls $(CLOSURE_LIB)
+	-ls $(CALCDEPS)
+	-ls $(CLOSURE_BUILDER)
+	-ls $(CLOSURE_COMPILER)
+	-ls $(ENTRYPOINT)
