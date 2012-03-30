@@ -3,12 +3,14 @@ CLOSURE_LIB = ../client/thirdparty/closure-library
 CALCDEPS = $(CLOSURE_LIB)/closure/bin/calcdeps.py
 CLOSURE_BUILDER = $(CLOSURE_LIB)/closure/bin/build/closurebuilder.py
 CLOSURE_COMPILER = ../client/thirdparty/compiler.jar
-LIBPATH = .
+LIBPATH = js $(CLOSURE_LIB)
 ENTRYPOINT = static/main.js
+EXTERNS = 
 
 # automatic settings
 LIBPATH_FOR_CALCDEPS = $(patsubst %,-p %, $(LIBPATH))
 LIBPATH_FOR_BUILDER = $(patsubst %,--root="%", $(LIBPATH))
+EXTERNS_FOR_BUILDER = $(patsubst %,--compiler_flags="--externs=%", $(EXTERNS))
 
 # targets
 deps: deps.js deps.txt
@@ -32,6 +34,7 @@ compile: deps.js
 	-$(CLOSURE_BUILDER) \
 	    --namespace="main.main" \
 	    $(LIBPATH_FOR_BUILDER) \
+	    $(EXTERNS_FOR_BUILDER) \
 	    --output_mode=compiled --compiler_jar="$(CLOSURE_COMPILER)" \
 	    -f --compilation_level=ADVANCED_OPTIMIZATIONS \
 	    -f --warning_level=VERBOSE \
@@ -45,3 +48,11 @@ report:
 	@cat lint.log
 	@cat compile.log
 	python client.py
+
+# test welknown problems
+conftest:
+	-ls $(CLOSURE_LIB)
+	-ls $(CALCDEPS)
+	-ls $(CLOSURE_BUILDER)
+	-ls $(CLOSURE_COMPILER)
+	-ls $(ENTRYPOINT)

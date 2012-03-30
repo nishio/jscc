@@ -20,4 +20,11 @@ highcharts:
 	mv Highcharts-2.2.1.zip server/static/thirdparty/Highcharts
 	cd server/static/thirdparty/Highcharts; unzip Highcharts-2.2.1.zip
 
-
+client_install:
+	cd ..; \
+	-mv Makefile Makefile.old; \
+	-mv build.sh build.sh.old; \
+	-mv client.py client.py.old; \
+	ln -s jscc/client/Makefile; \
+	ln -s jscc/client/build.sh; \
+	ln -s jscc/client/client.py
