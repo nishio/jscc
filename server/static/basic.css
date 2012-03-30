@@ -1,11 +1,11 @@
 #error, #warning, #lint {
-    height: 30%;
+    height: 33%;
     width: 100%;
 }
 
 #container {
     width: 320px;
-    height: 480px;
+    height: 376px;
 }
 
 #border {
