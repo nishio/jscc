@@ -69,12 +69,15 @@ HOW TO USE
 
 - 1: Fork the repos on github.
 - 2: 'git clone' into your project dir
-- 3: 'git checkout -b <some_name_to_identify_your_project>'
-- 4: 'ln -s' jscc/client/{build.sh, Makefile, client.py}
-- 5: Try 'make {deps.txt, lint, deps.js, compile}'
-- 6: Run jscc/server/server.py.
+- 3: Make branch: 'git checkout -b <some_name_to_identify_your_project>'
+- 4: Do: jscc$ make client_install
+     it does 'ln -s' jscc/client/{build.sh, Makefile, client.py}
+- 5: Try 'make conftest' to configure correctly
+- 6: Try 'make {deps.txt, lint, deps.js, compile}'
+     especially 'make compile' fails when you set wrong LIBPATH and EXTERNS, be careful.
+- 7: Run jscc/server/server.py
      It may better to use another shell not to bother with a lot of logs.
-- 7: Try 'make {report, watch}'.
+- 8: Try 'make {report, watch}'
      'make watch' also be better to run on another shell.
 
 
