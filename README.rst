@@ -5,6 +5,14 @@
 JavaScript is very loose language.
 Closure Compiler helps us to keep quality of codes.
 
+jscc does:
+
+- watch modification of your JS files (using watchdog and goog.require dependency),
+- background compile & lint (using Closure Compiler and Closure Lint),
+- visualize them with dinamic graph (using Highcharts and Flask).
+
+
+
 
 CONTENTS
 ========
