@@ -11,7 +11,7 @@ jscc does:
 - background compile & lint (using Closure Compiler and Closure Lint),
 - visualize them with dinamic graph (using Highcharts and Flask).
 
-
+You can see screenshots of dinamic graphs on: https://github.com/nishio/jscc/blob/gh-pages/screenshot.png
 
 
 CONTENTS
