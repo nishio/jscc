@@ -3,6 +3,8 @@ goog.provide('main.main');
 
 /**
  * @suppress {checkTypes}
+ * @param {*} $ .
+ * @param {*} Highcharts .
  */
 main.main = function($, Highcharts) {
     var series = {error: null, warning: null, lint: null};
