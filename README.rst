@@ -81,7 +81,7 @@ HOW TO USE
 ISSUES
 ======
 
-- we need nice way to kill watching process
+- we need nice way to kill watching process (instead of manual `kill`)
 - when you clone jscc in your working dir
   and set 'LIBPATH = .', a namespace 'main.main' provided in jscc/server/static/main.js
   may conflict other 'main.main' in your scripts.
