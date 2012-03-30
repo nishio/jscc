@@ -49,59 +49,66 @@
       JavaScript Continuous Compilation
     </div>
 
-    
-      <p>JavaScript is very loose language. Closure Compiler helps us to keep quality of codes.</p>
-    
 
-    
+    <p>JavaScript is very loose language. Closure Compiler helps us to keep quality of codes.</p>
+
+    <p>jscc does: watch modification of your JS files (using watchdog and goog.require dependency),
+      background compile & lint (using Closure Compiler and Closure Lint),
+      visualize them with dinamic graph (using Highcharts and Flask).
+    </p>
+
+    <p>
+      <img src="screenshot.png">
+    </p>
+
       <h2>Dependencies</h2>
-      <p>Closure Linter
-growlnotify
-Watchdog
-Closure Library
-Closure Compiler
+      <p>
+        <ul>
+          <li>Closure Linter</li>
+          <li>growlnotify</li>
+          <li>Watchdog</li>
+          <li>Closure Library</li>
+          <li>Closure Compiler</li>
+          <li>Flask</li>
+          <li>Highcharts</li>
+        </ul>
+      </p>
 
-Flask
-Highcharts</p>
-    
 
-    
+
       <h2>Install</h2>
-      <p>1: Fork the repos on github.
 
-2: 'git clone' into your project dir
+      <p><ol>
+          <li>Fork the repos on github.</li>
+          <li>'git clone' into your project dir.</li>
+          <li>Make branch: 'git checkout -b <some_name_to_identify_your_project>'</li>
+          <li>Do: jscc$ make client_install<br/>
+            it does 'ln -s' jscc/client/{build.sh, Makefile, client.py}</li>
+          <li>Try 'make conftest' to configure correctly</li>
+          <li>Try 'make {deps.txt, lint, deps.js, compile}'<br/>
+            especially 'make compile' fails when you set wrong LIBPATH and EXTERNS, be careful.</li>
+          <li>Run jscc/server/server.py<br/>
+            It may better to use another shell not to bother with a lot of logs.</li>
+          <li>Try 'make {report, watch}'<br/>
+            'make watch' also be better to run on another shell.</li>
+        </ol>
+      </p>
 
-3: Make branch: 'git checkout -b <some_name_to_identify_your_project>'
 
-4: Do: jscc$ make client_install
-it does 'ln -s' jscc/client/{build.sh, Makefile, client.py}
 
-5: Try 'make conftest' to configure correctly
-
-6: Try 'make {deps.txt, lint, deps.js, compile}'
-especially 'make compile' fails when you set wrong LIBPATH and EXTERNS, be careful.
-
-7: Run jscc/server/server.py
-It may better to use another shell not to bother with a lot of logs.
-
-8: Try 'make {report, watch}'
-'make watch' also be better to run on another shell.</p>
-    
-
-    
       <h2>License</h2>
       <p>MIT LICENSE</p>
-    
 
-    
+
+
       <h2>Authors</h2>
       <p>NISHIO Hirokazu (nishio.hirokazu@gmail.com)<br/>      </p>
-    
 
-    
+
+
       <h2>Contact</h2>
       <p> (github@nishiohirokazu.org)<br/>      </p>
-    
+
 
     <h2>Download</h2>
     <p>
