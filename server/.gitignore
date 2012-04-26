@@ -1,2 +1,9 @@
 database
-static/thirdparty/Highcharts
+static/thirdparty/Highcharts/examples
+static/thirdparty/Highcharts/exporting-server/
+static/thirdparty/Highcharts/graphics/
+static/thirdparty/Highcharts/index.htm
+static/thirdparty/Highcharts/js/adapters/
+static/thirdparty/Highcharts/js/highcharts.src.js
+static/thirdparty/Highcharts/js/modules/
+static/thirdparty/Highcharts/js/themes/
