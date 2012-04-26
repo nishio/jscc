@@ -5,7 +5,9 @@
 - watch周り
 
   - Windows(cygwin)だとwatchmedoがうまく動かないらしい
+
   - 現状watchしているプロセスを殺す方法がない
+
   - →いっそPythonでファイルの更新日時をポーリングするののほうがよい？
 
 
