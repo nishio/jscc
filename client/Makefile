@@ -5,12 +5,14 @@ CLOSURE_BUILDER = $(CLOSURE_LIB)/closure/bin/build/closurebuilder.py
 CLOSURE_COMPILER = ../client/thirdparty/compiler.jar
 LIBPATH = js $(CLOSURE_LIB)
 ENTRYPOINT = static/main.js
-EXTERNS = 
+EXTERNS =
+JS_FILES = deps.js
 
 # automatic settings
 LIBPATH_FOR_CALCDEPS = $(patsubst %,-p %, $(LIBPATH))
 LIBPATH_FOR_BUILDER = $(patsubst %,--root="%", $(LIBPATH))
 EXTERNS_FOR_BUILDER = $(patsubst %,--compiler_flags="--externs=%", $(EXTERNS))
+JS_FILES_FOR_BUILDER = $(patsubst %,--compiler_flags="--js=%", $(JS_FILES))
 
 # targets
 deps: deps.js deps.txt
@@ -35,11 +37,11 @@ compile: deps.js
 	    --namespace="main.main" \
 	    $(LIBPATH_FOR_BUILDER) \
 	    $(EXTERNS_FOR_BUILDER) \
+	    $(JS_FILES_FOR_BUILDER) \
 	    --output_mode=compiled --compiler_jar="$(CLOSURE_COMPILER)" \
 	    -f --compilation_level=ADVANCED_OPTIMIZATIONS \
 	    -f --warning_level=VERBOSE \
 	    -f --jscomp_warning=visibility \
-	    --compiler_flags="--js=deps.js" \
 	    > /dev/null 2> new_compile.log
 	mv new_compile.log compile.log
 	cat compile.log
