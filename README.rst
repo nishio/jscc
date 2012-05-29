@@ -45,6 +45,7 @@ For client
 
   http://growl.info/extras.php#growlnotify
 
+  If you don't need notification with growl, uncomment it from build.sh
 
 - Watchdog
 
@@ -103,6 +104,12 @@ ISSUES
 - enbug.py will hung up if a whitespace-only file is passed
 - enbug.py should output bugs as line diff.
 - make graph's minimum Y == 0.
+
+HISTORY
+=======
+
+2012-03-27 First Release
+2012-05-29 v1.1: Support Flymake
 
 
 THANKS
