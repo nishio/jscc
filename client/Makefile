@@ -51,6 +51,12 @@ report:
 	@cat compile.log
 	python client.py
 
+
+# for flymake
+check-syntax:
+	cat compile.log
+
+
 # test welknown problems
 conftest:
 	-ls $(CLOSURE_LIB)
