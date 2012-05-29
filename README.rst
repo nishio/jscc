@@ -45,6 +45,7 @@ For client
 
   http://growl.info/extras.php#growlnotify
 
+  If you don't need notification with growl, uncomment it from build.sh
 
 - Watchdog
 
@@ -88,6 +89,20 @@ HOW TO USE
 - 8: Try 'make {report, watch}'
      'make watch' also be better to run on another shell.
 
+HOW TO USE WITH FLYMAKE
+=======================
+
+If you use emacs, you can highlight error/warning line on emacs.
+After add *("\\.js\\'" flymake-simple-make-init)* into *flymake-allowed-file-name-masks* ,
+flymake-mode call "make check-syntax" when you save files.
+
+::
+   (add-to-list 'flymake-allowed-file-name-masks
+                '("\\.js\\'" flymake-simple-make-init))
+
+   (add-hook 'java-mode-hook
+             '(lambda ()
+                (flymake-mode)))
 
 ISSUES
 ======
@@ -103,6 +118,12 @@ ISSUES
 - enbug.py will hung up if a whitespace-only file is passed
 - enbug.py should output bugs as line diff.
 - make graph's minimum Y == 0.
+
+HISTORY
+=======
+
+2012-03-27 First Release
+2012-05-29 v1.1: Support Flymake
 
 
 THANKS
