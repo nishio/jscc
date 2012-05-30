@@ -62,7 +62,33 @@ if 0:
 
 
 from time import sleep
+from watchdog.observers import Observer
+from watchdog.events import LoggingEventHandler, FileSystemEventHandler
+import atexit
 
-while 1:
-    print "hoge"
-    sleep(1)
+import logging
+logging.basicConfig(level='INFO')
+
+class MyHandler(FileSystemEventHandler):
+    def on_any_event(self, event):
+        print event
+    def on_modified(self, event):
+        print "mod", event
+
+if __name__ == "__main__":
+    #event_handler = MyHandler()
+    event_handler = LoggingEventHandler()
+    observer = Observer()
+    observer.schedule(event_handler, path='.', recursive=True)
+    observer.start()
+
+    @atexit.register
+    def _exit():
+        observer.stop()
+        observer.join()
+
+    while True:
+        sleep(1)
+
+
+
