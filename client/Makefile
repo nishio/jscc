@@ -23,6 +23,13 @@ deps.js:
 deps.txt:
 	$(CALCDEPS) -i $(ENTRYPOINT) -o list $(LIBPATH_FOR_CALCDEPS) > deps.txt
 
+watch-start:
+	python watch.py
+
+watch-stop:
+	kill `cat watch.pid`
+	-rm watch.pid
+
 watch: deps.txt
 	./build.sh
 	cat deps.txt | xargs watchmedo shell-command --command="./build.sh" &
