@@ -104,20 +104,26 @@ flymake-mode call "make check-syntax" when you save files.
              '(lambda ()
                 (flymake-mode)))
 
-ISSUES
-======
+TODO
+====
 
-- we need nice way to kill watching process (instead of manual `kill`)
-- when you clone jscc in your working dir
-  and set 'LIBPATH = .', a namespace 'main.main' provided in jscc/server/static/main.js
-  may conflict other 'main.main' in your scripts.
-- preserve past errors. (now just have the last data. it lost if server restarted)
-- record what kind of error occurs, statistics?
-- be able to scroll the graph to see past
-- enbug.py will crash if empty file is passed
-- enbug.py will hung up if a whitespace-only file is passed
-- enbug.py should output bugs as line diff.
-- make graph's minimum Y == 0.
+- quickstart.py have a lot of TODO
+- move compile.log and lint.log into .jscc
+- I implemented watch.py. Use it to watch scripts' modification.
+
+- other issues
+
+  - we need nice way to kill watching process (instead of manual `kill`)
+  - when you clone jscc in your working dir
+    and set 'LIBPATH = .', a namespace 'main.main' provided in jscc/server/static/main.js
+    may conflict other 'main.main' in your scripts.
+  - preserve past errors. (now just have the last data. it lost if server restarted)
+  - record what kind of error occurs, statistics?
+  - be able to scroll the graph to see past
+  - enbug.py will crash if empty file is passed
+  - enbug.py will hung up if a whitespace-only file is passed
+  - enbug.py should output bugs as line diff.
+  - make graph's minimum Y == 0.
 
 
 HISTORY
