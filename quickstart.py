@@ -77,6 +77,8 @@ if install_type == "tiny sample":
     shutil.copy(os.path.join(SAMPLE_DIR, "index.html"), ".")
     makedirs("js")
     shutil.copy(os.path.join(SAMPLE_DIR, "main.js"), "js")
+    os.chdir(os.path.join(destination, "js"))
+    subprocess.call(["ln", "-s", CLOSURE_LIB_PATH])
 
 os.chdir(JSCC_PATH)
 subprocess.call(["ln", "-s", os.path.join(CLIENT_ABSPATH, "build.sh")])
