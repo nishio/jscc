@@ -83,6 +83,4 @@ if install_type == "tiny sample":
 os.chdir(JSCC_PATH)
 subprocess.call(["ln", "-s", os.path.join(CLIENT_ABSPATH, "build.sh")])
 subprocess.call(["ln", "-s", os.path.join(CLIENT_ABSPATH, "client.py")])
-
-
-
+subprocess.call(["ln", "-s", os.path.join(CLIENT_ABSPATH, "watch.py")])

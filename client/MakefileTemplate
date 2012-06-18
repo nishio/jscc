@@ -24,7 +24,7 @@ js/deps.js:
 	$(CALCDEPS) -i $(ENTRYPOINT) -o list $(LIBPATH_FOR_CALCDEPS) > .jscc/deps.txt
 
 watch-start:
-	python .jscc/watch.py
+	cd .jscc; python watch.py
 
 watch-stop:
 	kill `cat .jscc/watch.pid`

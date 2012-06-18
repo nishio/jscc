@@ -12,7 +12,7 @@ However I want to control some feature
 
 import os
 import sys
-from subprocess import Popen
+import subprocess
 
 DEPS_FILE_NAME = "deps.txt"
 BUILD_COMMAND = "./build.sh"
@@ -30,9 +30,9 @@ fo.close()
 
 # run build.sh async
 def build():
-    return
-    Popen([BUILD_COMMAND], shell=True)
-#build()
+    subprocess.call([BUILD_COMMAND], shell=True)
+
+build()
 
 
 
@@ -71,15 +71,14 @@ logging.basicConfig(level='INFO')
 
 class MyHandler(FileSystemEventHandler):
     def on_any_event(self, event):
-        print event
-    def on_modified(self, event):
-        print "mod", event
+        print "modified"
+        build()
 
 if __name__ == "__main__":
-    #event_handler = MyHandler()
-    event_handler = LoggingEventHandler()
+    event_handler = MyHandler()
+    #event_handler = LoggingEventHandler()
     observer = Observer()
-    observer.schedule(event_handler, path='.', recursive=True)
+    observer.schedule(event_handler, path='../js', recursive=True)
     observer.start()
 
     @atexit.register
