@@ -30,4 +30,4 @@ server/static/thirdparty/Highcharts/js:
 quickstart:
 	-rm -rf qssample
 	python quickstart.py
-	cd qssample; make compile
+	cd qssample; make compile; make lint; make report
