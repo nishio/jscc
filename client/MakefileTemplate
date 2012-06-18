@@ -15,13 +15,13 @@ EXTERNS_FOR_BUILDER = $(patsubst %,--compiler_flags="--externs=%", $(EXTERNS))
 JS_FILES_FOR_BUILDER = $(patsubst %,--compiler_flags="--js=%", $(JS_FILES))
 
 # targets
-deps: deps.js deps.txt
+deps: js/deps.js .jscc/deps.txt
 
-deps.js:
-	$(CALCDEPS) -i $(ENTRYPOINT) -o deps $(LIBPATH_FOR_CALCDEPS) > deps.js
+js/deps.js:
+	$(CALCDEPS) -i $(ENTRYPOINT) -o deps $(LIBPATH_FOR_CALCDEPS) > js/deps.js
 
-deps.txt:
-	$(CALCDEPS) -i $(ENTRYPOINT) -o list $(LIBPATH_FOR_CALCDEPS) > deps.txt
+.jscc/deps.txt:
+	$(CALCDEPS) -i $(ENTRYPOINT) -o list $(LIBPATH_FOR_CALCDEPS) > .jscc/deps.txt
 
 watch-start:
 	python watch.py
@@ -30,16 +30,16 @@ watch-stop:
 	kill `cat watch.pid`
 	-rm watch.pid
 
-watch: deps.txt
+watch: .jscc/deps.txt
 	./build.sh
-	cat deps.txt | xargs watchmedo shell-command --command="./build.sh" &
+	cat .jscc/deps.txt | xargs watchmedo shell-command --command="./build.sh" &
 
-lint: deps.txt
-	-cat deps.txt | xargs gjslint > new_lint.log 2> /dev/null
-	mv new_lint.log lint.log
-	cat lint.log
+lint: .jscc/deps.txt
+	-cat .jscc/deps.txt | xargs gjslint > .jscc/new_lint.log 2> /dev/null
+	mv .jscc/new_lint.log .jscc/lint.log
+	cat .jscc/lint.log
 
-compile: deps.js
+compile: js/deps.js
 	-$(CLOSURE_BUILDER) \
 	    --namespace="main.main" \
 	    $(LIBPATH_FOR_BUILDER) \
@@ -49,19 +49,19 @@ compile: deps.js
 	    -f --compilation_level=ADVANCED_OPTIMIZATIONS \
 	    -f --warning_level=VERBOSE \
 	    -f --jscomp_warning=visibility \
-	    > /dev/null 2> new_compile.log
-	mv new_compile.log compile.log
-	cat compile.log
+	    > /dev/null 2> .jscc/new_compile.log
+	mv .jscc/new_compile.log .jscc/compile.log
+	cat .jscc/compile.log
 
 report:
-	@cat lint.log
-	@cat compile.log
-	python client.py
+	@cat .jscc/lint.log
+	@cat .jscc/compile.log
+	python .jscc/client.py
 
 
 # for flymake
 check-syntax:
-	cat compile.log
+	cat .jscc/compile.log
 
 
 # test welknown problems
