@@ -56,7 +56,7 @@ compile: js/deps.js
 report:
 	@cat .jscc/lint.log
 	@cat .jscc/compile.log
-	python .jscc/client.py
+	cd .jscc; python client.py
 
 
 # for flymake
