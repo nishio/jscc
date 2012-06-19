@@ -27,16 +27,12 @@ js/deps.js:
 .jscc/deps.txt:
 	$(CALCDEPS) -i $(ENTRYPOINT) -o list $(LIBPATH_FOR_CALCDEPS) > .jscc/deps.txt
 
-watch-start:
+watch:
 	cd .jscc; python watch.py
 
-watch-stop:
+kill-watch:
 	kill `cat .jscc/watch.pid`
 	-rm .jscc/watch.pid
-
-watch: .jscc/deps.txt
-	./build.sh
-	cat .jscc/deps.txt | xargs watchmedo shell-command --command="./build.sh" &
 
 lint: .jscc/deps.txt
 	-cat .jscc/deps.txt | xargs gjslint > .jscc/new_lint.log 2> /dev/null
