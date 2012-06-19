@@ -6,7 +6,7 @@ CLOSURE_COMPILER = {CLOSURE_COMPILER_PATH}
 LIBPATH = js $(CLOSURE_LIB)
 ENTRYPOINT = js/main.js
 EXTERNS =
-JS_FILES = deps.js
+JS_FILES = js/deps.js
 
 # automatic settings
 LIBPATH_FOR_CALCDEPS = $(patsubst %,-p %, $(LIBPATH))
