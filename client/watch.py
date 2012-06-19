@@ -69,10 +69,11 @@ import atexit
 import logging
 logging.basicConfig(level='INFO')
 
+to_build = False
 class MyHandler(FileSystemEventHandler):
     def on_any_event(self, event):
-        print "modified"
-        build()
+        global to_build
+        to_build = True
 
 if __name__ == "__main__":
     event_handler = MyHandler()
@@ -87,6 +88,9 @@ if __name__ == "__main__":
         observer.join()
 
     while True:
+        if to_build:
+            build()
+            to_build = False
         sleep(1)
 
 
