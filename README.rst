@@ -76,6 +76,8 @@ For server
 HOW TO USE
 ==========
 
+(currently we are making quickstart.py to make easy this step)
+
 - 1: Fork the repos on github.
 - 2: 'git clone' into your project dir
 - 3: Make branch: 'git checkout -b <some_name_to_identify_your_project>'
@@ -108,8 +110,9 @@ TODO
 ====
 
 - quickstart.py have a lot of TODO
-- move compile.log and lint.log into .jscc
-- I implemented watch.py. Use it to watch scripts' modification.
+  - make server IP and port configurable
+- (done) move compile.log and lint.log into .jscc
+- (done) I implemented watch.py. Use it to watch scripts' modification.
 
 - other issues
 
