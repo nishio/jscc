@@ -39,9 +39,11 @@ CLOSURE_LIB_PATH = os.path.abspath("client/thirdparty/closure-library")
 CLOSURE_COMPILER_PATH = os.path.abspath("client/thirdparty/compiler.jar")
 
 
+
 # TODO: changable
 #destination = os.path.abspath("qssample")
-destination = os.path.abspath("/Users/nishio/cur/LazyK-on-browser")
+#destination = os.path.abspath("/Users/nishio/cur/LazyK-on-browser")
+destination = os.path.abspath("/Users/nishio/cur/webui/ClicKintone")
 
 # TODO: ask them
 #use_vis_server = yes_or_no("Use visualization server?")
@@ -57,8 +59,9 @@ HTML5 Boilerplate
 #install_type = "tiny sample"
 install_type = "existing"
 
-
-if not install_type == "existing":
+if install_type == "existing" and os.path.isdir(destination):
+    raise RuntimeError("%s not found" % destination)
+else:
     makedirs(destination)
 
 JSCC_PATH = os.path.join(destination, ".jscc")
@@ -71,13 +74,15 @@ if os.path.isdir(JSCC_PATH):
         sys.exit(1)
 makedirs(JSCC_PATH)
 
+def if_exist_rename(file):
+    if os.path.isfile(file):
+        os.rename(file, file + ".bak")
 
 NEW_MAKEFILE = os.path.join(destination, "Makefile")
 print "generating Makefile at", NEW_MAKEFILE
 # if Makefile exists, make backup
 if install_type == "existing":
-    if os.path.isfile(NEW_MAKEFILE):
-        os.rename(NEW_MAKEFILE, NEW_MAKEFILE + ".bak")
+    if_exist_rename(NEW_MAKEFILE)
 
 # make Makefile
 data = open("client/MakefileTemplate").read()
@@ -89,11 +94,19 @@ data = data.format(**VARIABLES)
 data = open(NEW_MAKEFILE, "w").write(data)
 
 
+JS_PATH = os.path.join(destination, "js")
+makedirs(JS_PATH)
+
+if install_type == "existing":
+    NEW_MAIN_JS = os.path.join(JS_PATH, "main.js")
+    if_exist_rename(NEW_MAIN_JS)
+    MAIN_JS = os.path.join(JSCC_ROOT, "client", "sample", "existing", "main.js")
+    shutil.copy(MAIN_JS, NEW_MAIN_JS)
+
 os.chdir(destination)
 if install_type == "tiny sample":
     SAMPLE_DIR = os.path.join(JSCC_ROOT, "client", "sample", "tiny")
     shutil.copy(os.path.join(SAMPLE_DIR, "index.html"), ".")
-    makedirs("js")
     shutil.copy(os.path.join(SAMPLE_DIR, "main.js"), "js")
     os.chdir(os.path.join(destination, "js"))
     subprocess.call(["ln", "-s", CLOSURE_LIB_PATH])
