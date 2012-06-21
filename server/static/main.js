@@ -15,31 +15,46 @@ main.main = function($, Highcharts) {
             series[name] = value;
         }
 
+        function success_to_get_data(data) {
+            var when = data['when'];
+            if (when != prev_when) {
+                data_x++;
+                series['error'].addPoint(
+                    [data_x, data['error']], true, true);
+                series['warning'].addPoint(
+                    [data_x, data['warning']], true, true);
+                series['lint'].addPoint(
+                    [data_x, data['lint']], true, true);
+                prev_when = when;
+                if (!data['success']) {
+                    $('#border').css('border-color', 'red')
+                    .css('background', '#FFAAAA');
+                }else {
+                    $('#border').css('background', 'white');
+                    if (data['warning'] > 0) {
+                        $('#border').css('border-color', 'yellow');
+                    }else {
+                        $('#border').css('border-color', 'green');
+                    }
+                }
+            }
+            $("#ajaxerror").remove();
+        }
+        function error_to_get_data(jqXHR, textStatus, errorThrown){
+            $('#border').css('border-color', 'red')
+            .css('background', '#FFAAAA');
+            if($("#ajaxerror").length == 0){
+                $('#border').after("<p id='ajaxerror'>Conection lost");
+            }
+        }
         setInterval(function() {
             if (series['error'] && series['warning'] && series['lint']) {
-                $.getJSON('/api/get', function(data) {
-                    var when = data['when'];
-                    if (when != prev_when) {
-                        data_x++;
-                        series['error'].addPoint(
-                            [data_x, data['error']], true, true);
-                        series['warning'].addPoint(
-                            [data_x, data['warning']], true, true);
-                        series['lint'].addPoint(
-                            [data_x, data['lint']], true, true);
-                        prev_when = when;
-                        if (!data['success']) {
-                            $('#border').css('border-color', 'red')
-                            .css('background', '#FFAAAA');
-                        }else {
-                            $('#border').css('background', 'white');
-                            if (data['warning'] > 0) {
-                                $('#border').css('border-color', 'yellow');
-                            }else {
-                                $('#border').css('border-color', 'green');
-                            }
-                        }
-                    }
+                $.ajax({
+                    url: '/api/get',
+                    dataType: 'json',
+                    success: success_to_get_data,
+                    timeout: 1000,
+                    error: error_to_get_data
                 });
             }
         }, 1000);
