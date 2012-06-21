@@ -31,7 +31,7 @@ watch:
 	cd .jscc; python watch.py
 
 kill-watch:
-	kill `cat .jscc/watch.pid`
+	-kill `cat .jscc/watch.pid`
 	-rm .jscc/watch.pid
 
 lint: .jscc/deps.txt
