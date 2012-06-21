@@ -72,6 +72,9 @@ logging.basicConfig(level='INFO')
 to_build = False
 class MyHandler(FileSystemEventHandler):
     def on_any_event(self, event):
+        filename = os.path.split(event.src_path)[1]
+        if not filename.endswith(".js"): return
+        if filename.endswith("_flymake.js"): return
         global to_build
         to_build = True
 
