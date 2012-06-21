@@ -92,8 +92,8 @@ if __name__ == "__main__":
 
     while True:
         if to_build:
-            build()
             to_build = False
+            build()
         sleep(1)
 
 
