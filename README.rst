@@ -91,6 +91,7 @@ HOW TO USE
 - 8: Try 'make {report, watch}'
      'make watch' also be better to run on another shell.
 
+
 HOW TO USE WITH FLYMAKE
 =======================
 
@@ -108,6 +109,8 @@ flymake-mode call "make check-syntax" when you save files.
 
 TODO
 ====
+
+- remove watch.pid when wacter.py killed by Ctrl-C
 
 - quickstart.py have a lot of TODO
   - make server IP and port configurable
