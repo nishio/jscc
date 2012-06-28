@@ -26,3 +26,7 @@ server/static/thirdparty/Highcharts/js:
 	mv Highcharts-2.2.1.zip server/static/thirdparty/Highcharts
 	cd server/static/thirdparty/Highcharts; unzip Highcharts-2.2.1.zip
 
+# for easy development
+quickstart:
+	-rm -rf qssample
+	python quickstart.py
