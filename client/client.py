@@ -5,6 +5,14 @@ import urllib2
 import urllib
 import argparse
 
+parser = argparse.ArgumentParser(description='send info to visualizing server')
+parser.add_argument('--port', default=8104, type=int)
+parser.add_argument('--server', default="localhost", type=str)
+
+args = parser.parse_args()
+URL = "http://%s:%s/api/put?" % (args.server, args.port)
+
+# collect lint error
 data = {"error": None, "warning": None}
 messages = []
 for line in open("lint.log"):
@@ -14,7 +22,7 @@ for line in open("lint.log"):
 
 data["lint"] = len(messages)
 
-
+# collect compile error
 success = False
 for line in open("compile.log"):
     if "error(s)" in line or "warning(s)" in line:
@@ -32,10 +40,4 @@ data["when"] = datetime.now().isoformat()
 data["success"] = success
 
 
-parser = argparse.ArgumentParser(description='send info to visualizing server')
-parser.add_argument('--port', default=8104, type=int)
-parser.add_argument('--server', default="localhost", type=str)
-
-args = parser.parse_args()
-URL = "http://%s:%s/api/put?" % (args.server, args.port)
 urllib2.urlopen(URL + urllib.urlencode({"json": json.dumps(data)}))
