@@ -116,7 +116,8 @@ TODO
   - make server IP and port configurable
 - (done) move compile.log and lint.log into .jscc
 - (done) I implemented watch.py. Use it to watch scripts' modification.
-
+- 'server' is now a sample of jscc managed project, but in old-style.
+  Make it not-jscc-managed project, and make quckstart.py can jscc-ize it.
 - other issues
 
   - we need nice way to kill watching process (instead of manual `kill`)
