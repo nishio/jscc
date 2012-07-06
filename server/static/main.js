@@ -49,6 +49,7 @@ main.main = function($, Highcharts) {
             .css('background', '#FFAAAA');
             if($("#ajaxerror").length == 0){
                 $('#border').after("<p id='ajaxerror'>Conection lost");
+                $('#detail').text('');
             }
         }
 
