@@ -108,6 +108,18 @@ flymake-mode call "make check-syntax" when you save files.
              '(lambda ()
                 (flymake-mode)))
 
+
+HOW TO RUN SERVER ON RACKHUB
+============================
+
+- 1: Log in your rack
+- 2: git clone <repos>
+  (TODO: install Flask)
+- 3: git checkout develop # optional
+- 4: cd server
+- 5: python server.py --port 3000
+
+
 TODO
 ====
 
@@ -119,26 +131,26 @@ TODO
 - (done) I implemented watch.py. Use it to watch scripts' modification.
 - 'server' is now a sample of jscc managed project, but in old-style.
   Make it not-jscc-managed project, and make quckstart.py can jscc-ize it.
+
+- preserve past errors. (now just have the last data. it lost if server restarted)
+
 - other issues
 
-  - we need nice way to kill watching process (instead of manual `kill`)
-  - when you clone jscc in your working dir
-    and set 'LIBPATH = .', a namespace 'main.main' provided in jscc/server/static/main.js
-    may conflict other 'main.main' in your scripts.
-  - preserve past errors. (now just have the last data. it lost if server restarted)
+  - (done)we need nice way to kill watching process (instead of manual `kill`)
   - record what kind of error occurs, statistics?
   - be able to scroll the graph to see past
   - enbug.py will crash if empty file is passed
   - enbug.py will hung up if a whitespace-only file is passed
   - enbug.py should output bugs as line diff.
   - make graph's minimum Y == 0.
+  - make graph's minimun tick >= 1
 
 
 HISTORY
 =======
 
-2012-03-27 First Release
 2012-05-29 v1.1: Support Flymake
+2012-03-27 First Release
 
 
 THANKS
