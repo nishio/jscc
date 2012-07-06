@@ -16,7 +16,7 @@ client/thirdparty/compiler.jar:
 	mv compiler-latest.zip client/thirdparty
 	cd client/thirdparty; unzip compiler-latest.zip
 
-server: highcharts
+server: highcharts flask
 
 highcharts: server/static/thirdparty/Highcharts/js
 
@@ -25,6 +25,10 @@ server/static/thirdparty/Highcharts/js:
 	-mkdir -p server/static/thirdparty/Highcharts
 	mv Highcharts-2.2.1.zip server/static/thirdparty/Highcharts
 	cd server/static/thirdparty/Highcharts; unzip Highcharts-2.2.1.zip
+
+flask:
+	easy_install pip
+	pip install flask
 
 # for easy development
 quickstart:

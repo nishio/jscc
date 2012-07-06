@@ -63,7 +63,7 @@ For client
 For server
 ----------
 
-- Flask
+- Flask (*)
 
   http://flask.pocoo.org/
 
@@ -100,6 +100,7 @@ After add *("\\.js\\'" flymake-simple-make-init)* into *flymake-allowed-file-nam
 flymake-mode call "make check-syntax" when you save files.
 
 ::
+
    (add-to-list 'flymake-allowed-file-name-masks
                 '("\\.js\\'" flymake-simple-make-init))
 
