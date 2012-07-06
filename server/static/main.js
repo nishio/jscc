@@ -37,9 +37,13 @@ main.main = function($, Highcharts) {
                         $('#border').css('border-color', 'green');
                     }
                 }
+                if(data['detail'] != null){
+                    $('#detail').text(data['detail']);
+                }
             }
             $("#ajaxerror").remove();
         }
+
         function error_to_get_data(jqXHR, textStatus, errorThrown){
             $('#border').css('border-color', 'red')
             .css('background', '#FFAAAA');
@@ -47,6 +51,7 @@ main.main = function($, Highcharts) {
                 $('#border').after("<p id='ajaxerror'>Conection lost");
             }
         }
+
         setInterval(function() {
             if (series['error'] && series['warning'] && series['lint']) {
                 $.ajax({
