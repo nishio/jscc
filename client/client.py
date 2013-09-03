@@ -38,10 +38,10 @@ for line in open("compile.log"):
         if data["warning"] == None: data["warning"] = 0
 
 if args.send_detail:
-    if success:
+    if data["error"] == data["warning"] == 0:
         data["detail"] = file('lint.log').read()
     else:
-        data["detail"] = file('compile.log').read()
+        data["detail"] = file('compile.log').read().decode("sjis")
 
 
 data["when"] = datetime.now().isoformat()
