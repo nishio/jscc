@@ -8,8 +8,6 @@ import argparse
 parser = argparse.ArgumentParser(description='send info to visualizing server')
 parser.add_argument('--port', default=8104, type=int)
 parser.add_argument('--server', default="localhost", type=str)
-parser.add_argument('--send-detail', action='store_true',
-                    help='send detailed compile error')
 
 args = parser.parse_args()
 URL = "http://%s:%s/api/put?" % (args.server, args.port)
@@ -37,11 +35,11 @@ for line in open("compile.log"):
         if data["error"] == None: data["error"] = 0
         if data["warning"] == None: data["warning"] = 0
 
-if args.send_detail:
-    if data["error"] == data["warning"] == 0:
-        data["detail"] = file('lint.log').read()
-    else:
-        data["detail"] = file('compile.log').read().decode("sjis")
+# add detail info
+if data["error"] == data["warning"] == 0:
+    data["detail"] = file('lint.log').read()
+else:
+    data["detail"] = file('compile.log').read().decode("sjis")
 
 
 data["when"] = datetime.now().isoformat()
