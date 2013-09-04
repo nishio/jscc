@@ -96,6 +96,7 @@ def start_watchdog_observer():
 
 
 def start_mainloop():
+    global to_build
     while True:
         if to_build:
             to_build = False
