@@ -14,17 +14,18 @@ import os
 import sys
 import subprocess
 
-DEPS_FILE_NAME = "deps.txt"
-BUILD_COMMAND = "./build.sh"
+# TODO: take them from args
+BUILD_COMMAND = './build.sh'
+JS_PATH = '../js'
 
 # if pid-file exists, warn and exit
-if os.path.isfile("watch.pid"):
-    print "watch.pid exists. Watch process is already running?"
+if os.path.isfile('watch.pid'):
+    print 'watch.pid exists. Watch process is already running?'
     sys.exit(1)
 
 # write own pid
 pid = os.getpid()
-fo = file("watch.pid", "w")
+fo = file('watch.pid', 'w')
 fo.write(str(pid))
 fo.close()
 
@@ -39,10 +40,13 @@ build()
 
 # read files in deps.txt
 # check mtime
+# tentative version
 if 0:
+    DEPS_FILE_NAME = 'deps.txt'
+
     files_mtime = {}
     deps_mtime = os.path.getmtime(DEPS_FILE_NAME)
-    for filename in file("deps.txt"):
+    for filename in file(DEPS_FILE_NAME):
         filename = filename.strip()
         mtime = os.path.getmtime(filename)
         files_mtime[filename] = mtime
@@ -73,16 +77,16 @@ to_build = False
 class MyHandler(FileSystemEventHandler):
     def on_any_event(self, event):
         filename = os.path.split(event.src_path)[1]
-        if not filename.endswith(".js"): return
-        if filename.endswith("_flymake.js"): return
+        if not filename.endswith('.js'): return
+        if filename.endswith('_flymake.js'): return
         global to_build
         to_build = True
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     event_handler = MyHandler()
     #event_handler = LoggingEventHandler()
     observer = Observer()
-    observer.schedule(event_handler, path='../js', recursive=True)
+    observer.schedule(event_handler, path=JS_PATH, recursive=True)
     observer.start()
 
     @atexit.register

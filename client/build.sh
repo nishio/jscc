@@ -19,7 +19,7 @@ make lint
 #
 make report
 
-cd .jscc
+cd _jscc
 
 growlnotify -m "end CI"
 rm -f build.lock
