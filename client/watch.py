@@ -13,31 +13,15 @@ However I want to control some feature
 import os
 import sys
 import subprocess
+import argparse
 
-# TODO: take them from args
-BUILD_COMMAND = './build.sh'
-JS_PATH = '../js'
+# for watchdog version
+from time import sleep
+from watchdog.observers import Observer
+from watchdog.events import LoggingEventHandler, FileSystemEventHandler
+import atexit
 
-# if pid-file exists, warn and exit
-if os.path.isfile('watch.pid'):
-    print 'watch.pid exists. Watch process is already running?'
-    sys.exit(1)
-
-# write own pid
-pid = os.getpid()
-fo = file('watch.pid', 'w')
-fo.write(str(pid))
-fo.close()
-
-# run build.sh async
-def build():
-    subprocess.call([BUILD_COMMAND], shell=True)
-
-build()
-
-
-
-
+MTIME = False  # use deps.txt and mtime polling to check modification
 # read files in deps.txt
 # check mtime
 # tentative version
@@ -65,15 +49,31 @@ if 0:
         pass
 
 
-from time import sleep
-from watchdog.observers import Observer
-from watchdog.events import LoggingEventHandler, FileSystemEventHandler
-import atexit
+# TODO: take them from args
+BUILD_COMMAND = './build.sh'
+JS_PATH = '../js'
+PID_FILE = 'watch.pid'
 
-import logging
-logging.basicConfig(level='INFO')
+to_build = False  # flag by what watch thread notify to build thread
 
-to_build = False
+def write_own_pid():
+    # if pid-file exists, warn and exit
+    if os.path.isfile(PID_FILE):
+        print 'watch.pid exists. Watch process is already running?'
+        sys.exit(1)
+
+    # write own pid
+    pid = os.getpid()
+    fo = file(PID_FILE, 'w')
+    fo.write(str(pid))
+    fo.close()
+
+
+def build():
+    "run build.sh async"
+    subprocess.call([BUILD_COMMAND], shell=True)
+
+
 class MyHandler(FileSystemEventHandler):
     def on_any_event(self, event):
         filename = os.path.split(event.src_path)[1]
@@ -82,9 +82,9 @@ class MyHandler(FileSystemEventHandler):
         global to_build
         to_build = True
 
-if __name__ == '__main__':
+
+def start_watchdog_observer():
     event_handler = MyHandler()
-    #event_handler = LoggingEventHandler()
     observer = Observer()
     observer.schedule(event_handler, path=JS_PATH, recursive=True)
     observer.start()
@@ -94,6 +94,8 @@ if __name__ == '__main__':
         observer.stop()
         observer.join()
 
+
+def start_mainloop():
     while True:
         if to_build:
             to_build = False
@@ -101,4 +103,26 @@ if __name__ == '__main__':
         sleep(1)
 
 
+def kill():
+    if os.path.isfile(PID_FILE):
+        subprocess.call(['kill', file(PID_FILE).read()], shell=True)
+        os.remove(PID_FILE)
 
+
+def main():
+    parser = argparse.ArgumentParser(description='Watch js-files modifications.')
+    parser.add_argument('--kill', dest='kill', action='store_true',
+                        help='kill watching process')
+
+    args = parser.parse_args()
+    if args.kill:
+        kill()
+    else:
+        write_own_pid()
+        build()
+        start_watchdog_observer()
+        start_mainloop()
+
+
+if __name__ == '__main__':
+    main()
