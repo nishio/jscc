@@ -2,29 +2,35 @@ DEFAULT: server client
 
 client: closure_library closure_compiler
 
-closure_library:
+closure_library: client/thirdparty/closure-library
+
+client/thirdparty/closure-library:
 	svn checkout http://closure-library.googlecode.com/svn/trunk/ closure-library
 	mkdir client/thirdparty
 	mv closure-library client/thirdparty
 
-closure_compiler:
+closure_compiler: client/thirdparty/compiler.jar
+
+client/thirdparty/compiler.jar:
 	wget http://closure-compiler.googlecode.com/files/compiler-latest.zip
 	mv compiler-latest.zip client/thirdparty
 	cd client/thirdparty; unzip compiler-latest.zip
 
-server: highcharts
+server: highcharts flask
 
-highcharts:
+highcharts: server/static/thirdparty/Highcharts/js
+
+server/static/thirdparty/Highcharts/js:
 	wget http://www.highcharts.com/downloads/zips/Highcharts-2.2.1.zip
 	-mkdir -p server/static/thirdparty/Highcharts
 	mv Highcharts-2.2.1.zip server/static/thirdparty/Highcharts
 	cd server/static/thirdparty/Highcharts; unzip Highcharts-2.2.1.zip
 
-client_install:
-	cd ..; \
-	-mv Makefile Makefile.old; \
-	-mv build.sh build.sh.old; \
-	-mv client.py client.py.old; \
-	ln -s jscc/client/Makefile; \
-	ln -s jscc/client/build.sh; \
-	ln -s jscc/client/client.py
+flask:
+	easy_install pip
+	pip install flask
+
+# for easy development
+quickstart:
+	-rm -rf qssample
+	python quickstart.py

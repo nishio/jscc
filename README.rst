@@ -63,7 +63,7 @@ For client
 For server
 ----------
 
-- Flask
+- Flask (*)
 
   http://flask.pocoo.org/
 
@@ -75,6 +75,8 @@ For server
 
 HOW TO USE
 ==========
+
+(currently we are making quickstart.py to make easy this step)
 
 - 1: Fork the repos on github.
 - 2: 'git clone' into your project dir
@@ -89,6 +91,7 @@ HOW TO USE
 - 8: Try 'make {report, watch}'
      'make watch' also be better to run on another shell.
 
+
 HOW TO USE WITH FLYMAKE
 =======================
 
@@ -97,6 +100,7 @@ After add *("\\.js\\'" flymake-simple-make-init)* into *flymake-allowed-file-nam
 flymake-mode call "make check-syntax" when you save files.
 
 ::
+
    (add-to-list 'flymake-allowed-file-name-masks
                 '("\\.js\\'" flymake-simple-make-init))
 
@@ -104,26 +108,49 @@ flymake-mode call "make check-syntax" when you save files.
              '(lambda ()
                 (flymake-mode)))
 
-ISSUES
-======
 
-- we need nice way to kill watching process (instead of manual `kill`)
-- when you clone jscc in your working dir
-  and set 'LIBPATH = .', a namespace 'main.main' provided in jscc/server/static/main.js
-  may conflict other 'main.main' in your scripts.
+HOW TO RUN SERVER ON RACKHUB
+============================
+
+- 1: Log in your rack
+- 2: git clone <repos>
+  (TODO: install Flask)
+- 3: git checkout develop # optional
+- 4: cd server
+- 5: python server.py --port 3000
+
+
+TODO
+====
+
+- remove watch.pid when wacter.py killed by Ctrl-C
+
+- quickstart.py have a lot of TODO
+  - make server IP and port configurable
+- (done) move compile.log and lint.log into .jscc
+- (done) I implemented watch.py. Use it to watch scripts' modification.
+- 'server' is now a sample of jscc managed project, but in old-style.
+  Make it not-jscc-managed project, and make quckstart.py can jscc-ize it.
+
 - preserve past errors. (now just have the last data. it lost if server restarted)
-- record what kind of error occurs, statistics?
-- be able to scroll the graph to see past
-- enbug.py will crash if empty file is passed
-- enbug.py will hung up if a whitespace-only file is passed
-- enbug.py should output bugs as line diff.
-- make graph's minimum Y == 0.
+
+- other issues
+
+  - (done)we need nice way to kill watching process (instead of manual `kill`)
+  - record what kind of error occurs, statistics?
+  - be able to scroll the graph to see past
+  - enbug.py will crash if empty file is passed
+  - enbug.py will hung up if a whitespace-only file is passed
+  - enbug.py should output bugs as line diff.
+  - make graph's minimum Y == 0.
+  - make graph's minimun tick >= 1
+
 
 HISTORY
 =======
 
-2012-03-27 First Release
 2012-05-29 v1.1: Support Flymake
+2012-03-27 First Release
 
 
 THANKS
