@@ -51,7 +51,6 @@ if 0:
 
 # TODO: take them from args
 BUILD_COMMAND = './build.sh'
-JS_PATH = '../js'
 PID_FILE = 'watch.pid'
 
 to_build = False  # flag by what watch thread notify to build thread
@@ -86,7 +85,7 @@ class MyHandler(FileSystemEventHandler):
 def start_watchdog_observer():
     event_handler = MyHandler()
     observer = Observer()
-    observer.schedule(event_handler, path=JS_PATH, recursive=True)
+    observer.schedule(event_handler, path=args.jsdir, recursive=True)
     observer.start()
 
     @atexit.register
@@ -106,14 +105,19 @@ def start_mainloop():
 
 def kill():
     if os.path.isfile(PID_FILE):
-        subprocess.call(['kill', file(PID_FILE).read()], shell=True)
+        pid = file(PID_FILE).read()
+        print 'killing', pid
+        subprocess.call(['kill', pid], shell=True)
         os.remove(PID_FILE)
 
 
 def main():
+    global args
     parser = argparse.ArgumentParser(description='Watch js-files modifications.')
     parser.add_argument('--kill', dest='kill', action='store_true',
                         help='kill watching process')
+    parser.add_argument('--jsdir', dest='jsdir',
+                        help='where js files to observe are placed')
 
     args = parser.parse_args()
     if args.kill:
