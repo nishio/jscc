@@ -77,7 +77,7 @@ HOW TO USE
 ==========
 
 (currently we are making quickstart.py to make easy this step)
-
+(it is obsolete, sorry)
 - 1: Fork the repos on github.
 - 2: 'git clone' into your project dir
 - 3: Make branch: 'git checkout -b <some_name_to_identify_your_project>'
@@ -90,6 +90,14 @@ HOW TO USE
      It may better to use another shell not to bother with a lot of logs.
 - 8: Try 'make {report, watch}'
      'make watch' also be better to run on another shell.
+
+
+If you already installed jscc:
+
+- 1: Make _jscc on your project dir
+- 2: "ln -s" for build.sh, watch.py, report.py
+- 3: Make Makefile (or something you want) to compile and lint your js-files. It is triggered by watch.py.
+
 
 
 HOW TO USE WITH FLYMAKE
