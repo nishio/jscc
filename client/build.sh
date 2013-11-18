@@ -1,8 +1,6 @@
 # assure only one script run on one time
-lockfile -r 0 build.lock || exit 1
+lockfile -r 0 _jscc/build.lock || exit 1
 growlnotify -m "begin CI"
-
-cd ..
 
 #
 # Run Compiler
@@ -19,7 +17,5 @@ make lint
 #
 make report
 
-cd _jscc
-
 growlnotify -m "end CI"
-rm -f build.lock
+rm -f _jscc/build.lock
