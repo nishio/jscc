@@ -109,12 +109,17 @@ def start_mainloop():
         sleep(1)
 
 
+def remove_pid():
+    print 'removing pid file:', PID_FILE
+    os.remove(PID_FILE)
+
+
 def kill():
     if os.path.isfile(PID_FILE):
         pid = file(PID_FILE).read()
         print 'killing', pid
         subprocess.call(['kill', pid], shell=True)
-        os.remove(PID_FILE)
+        remove_pid()
 
 
 def main():
@@ -134,8 +139,12 @@ def main():
         write_own_pid()
         build()
         start_watchdog_observer()
-        start_mainloop()
-
+        try:
+            start_mainloop()
+        except:
+            import traceback
+            traceback.print_exc()
+            remove_pid()
 
 if __name__ == '__main__':
     main()
