@@ -49,9 +49,14 @@ if 0:
         pass
 
 
-# TODO: take them from args
-BUILD_COMMAND = './build.sh'
-PID_FILE = 'watch.pid'
+# TODO: BUILD_COMMAND is now build.sh on same directory of the file. Take them from args.
+BUILD_COMMAND = os.path.join(
+    os.path.abspath(os.path.dirname(__file__)),
+    'build.sh')
+
+PID_FILE = os.path.join(
+    os.path.abspath(os.path.dirname(__file__)),
+    'watch.pid')
 
 to_build = False  # flag by what watch thread notify to build thread
 
