@@ -86,6 +86,7 @@ def start_watchdog_observer():
     event_handler = MyHandler()
     observer = Observer()
     observer.schedule(event_handler, path=args.jsdir, recursive=True)
+    observer.schedule(event_handler, path=args.externdir, recursive=True)
     observer.start()
 
     @atexit.register
@@ -118,6 +119,8 @@ def main():
                         help='kill watching process')
     parser.add_argument('--jsdir', dest='jsdir',
                         help='where js files to observe are placed')
+    parser.add_argument('--externdir', dest='externdir',
+                        help='where extern files to observe are placed')
 
     args = parser.parse_args()
     if args.kill:
